@@ -1,0 +1,17 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDEs
+.vscode/
+.idea/
+
+# Python & Data
+__pycache__/
+.ipynb_checkpoints/
+*.log
+data/
+
+# Personal
+.env
+*.tmp
