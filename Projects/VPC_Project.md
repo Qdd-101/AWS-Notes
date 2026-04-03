@@ -69,7 +69,8 @@ AZ: 同一个region内一般有多个AZ，如ap-northeast-1a, ap-northeast-1b.
 
     Turn on listener:  
     Go to Security on the right, add new inbound rule: HTTP 80 All ipv4
-    Reason: 使用ALB-DNS name访问时，如果不带后缀，浏览器默认的访问端口为80，此时ALB使用的SG只包含了ssh port22 + TCP port8000，所以会unreachable；如果使用了ALB-DNS:8000，理论是可以直接访问的
+    Reason: 使用ALB-DNS name访问时，如果不带后缀，浏览器默认的访问端口为80，此时ALB使用的SG只包含了ssh port22 + TCP port8000，所以会unreachable；如果使用了ALB-DNS:8000，理论是可以直接访问的  
+    
     ![VPC-listener](../Images/VPC-Listener.png)
 
 7. **Final Test.**  
