@@ -5,4 +5,7 @@ For AWS concepts, refer to:
 [Notes](Concepts/)  
 
 For AWS projects, refer to:  
-[Projects](Projects/)
+[Projects](Projects/)  
+
+For example scriptes, refer to:  
+[Scripts](Scripts/)
