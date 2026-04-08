@@ -1,5 +1,7 @@
 # AWS Basic Concepts  
-AWS: Amazon Web Services
+AWS: Amazon Web Services  
+Basic concepts Part I  
+Include: IAM, EC2, S3, VPC, Route 53
 - **IAM**  
   
   Concepts:  
@@ -84,9 +86,26 @@ AWS: Amazon Web Services
    ![python-server](../Images/python-8000.png)
    
 - **S3**  
-  Waiting to be updated...
+  
+   Concept: Simple Storage Service to store data.  
+   Advantages:
+   1. Scalable: You can store as much data as you want. S3 will manage it automatically. The more you store, the higher it costs.  Choose multiplart uploads if 1 single file is very huge. One single file shouldn't be larger than 5TB.  
+   2. Highly available: S3 will make many duplications of your data, so even if 1 AZ goes down, you can still access your data.  
+   3. Secure (11-9 policy: only 1 object of 1billion objects after 100 years' storage may get lost). All files you upload could be encrypted.  
+   4. Cost effective. Standard storage class only takes 0.02 dollars for 1GB per month. The better storage class, the more it costs.  
+
+   Namespace  
+   Global: 全球范围内不能用重名bucket  
+   Regional: 特定区域内不能有重名bucket, advantage: less latency
+   
+   Bucket: This is where you put your information.  
+   
+   S3 also has version control system, you can turn on the Version button, then S3 would record every version of the uploaded files with exactly the same names.
+   
+   
 - **VPC**  
-  Concept:  Virtual Private Cloud  
+  
+  Concept: Virtual Private Cloud  
 
   VPC is a secure, private, virtual network you created in the cloud. Completely isolated from others' network.  
 
