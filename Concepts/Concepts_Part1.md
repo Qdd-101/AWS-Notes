@@ -56,7 +56,7 @@ Include: IAM, EC2, S3, VPC, Route 53
    - java --version
   2. **Install Jenkins**:
    - Go to this page(https://www.jenkins.io/doc/book/installing/linux/) and paste the command to your terminal:  
-   ![jenkins](../Images/jenkins.jpg)  
+   ![jenkins](../Images/Part1/jenkins.jpg)  
    3. **If error**:  
   If java version doesn't match with the installed jenkins:  
   sudo apt install openjdk-21-jdk -y  
@@ -66,11 +66,11 @@ Include: IAM, EC2, S3, VPC, Route 53
   sudo systemctl daemon-reload  
   sudo systemctl restart jenkins  
   sudo systemctl status jenkins
-  ![jenkins-status](../Images/success-jenkins.png)  
+  ![jenkins-status](../Images/Part1/success-jenkins.png)  
   Now the EC2 server is ready to use Jenkins.  
   5. **Set up inbound security group on Ec2**  
    Add inbound rule to allow TCP + port 8080 on your EC2 instance.  
-   ![inbound-SG](../Images/jenkins-inbound-SG.png)  
+   ![inbound-SG](../Images/Part1/jenkins-inbound-SG.png)  
    6. **Access Jenkins**:  
    On your broswer, type: http://your-ec2-public-ip:8080  
    A jenkins login page will show up. On your EC2 terminal, enter:  
@@ -83,7 +83,7 @@ Include: IAM, EC2, S3, VPC, Route 53
    **python3 -m http.server**, (port 8000 will be opened and wait for any potential traffic coming in).  
    Then add inbound rules in SG: allow traffic using port 8000 to pass through.  
    Open in your browser: http://public-address:8000. You can your ubuntu machine's folder structure.
-   ![python-server](../Images/python-8000.png)
+   ![python-server](../Images/Part1/python-8000.png)
    
 - **S3**  
   
@@ -166,7 +166,7 @@ Include: IAM, EC2, S3, VPC, Route 53
        ▫ Save time: no need to deploy SG for every EC2 in the subnet, just deploy NACL for this subnet  
        ▫ Rule number: 从小到大匹配，一旦匹配上就直接执行操作(allow / deny)，如果一直没匹配上，会顺延使用最后一条默认规则(*) 丢弃数据
 
-  ![VPC-1](../Images/VPC-structure1.png)
+  ![VPC-1](../Images/Part1/VPC-structure1.png)
 
 - **Route 53**  
   Provide DNS services: maps the domain name with the ip address.  

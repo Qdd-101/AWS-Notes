@@ -3,7 +3,7 @@
 This project is going to set up a VPC which has 2 availability zones, each with 1 public subnet and 1 private subnet (that would be 4 subnet in total). The VPC will also have a bastion host, a NAT gateway, and a load balancer. ASG will be used to automatically launch EC2 instances in the private subnets.  The EC2 instance in the first private subnet will be a web which is reachable from your browser. The EC2 instance in the second private will be set up with nothing, and its SG will not be open. In the final test, you should only be able to access 1 web and unreachable to another.  
 
 The whole structure is shown below:  
-![VPC-project](../Images/VPC-project.png)  
+![VPC-project](../Images/Part1/VPC-project.png)  
 
 Some concepts before diving into the project:  
 Region: 地理位置，如Tokyo, Singpore.  
@@ -15,12 +15,12 @@ AZ: 同一个region内一般有多个AZ，如ap-northeast-1a, ap-northeast-1b.
    
    Need to create a template first if no template created before，make its desired NumberOfEc2 = 2.  
    Need to create SG for this template.  
-   ![ASG-setup1](../Images/VPC-project1.png)
+   ![ASG-setup1](../Images/Part1/VPC-project1.png)
 
    Make sure the following ports are allowed in SG inbound rules:  
    (1). SSH port 22  
    (2). TCP port 8000
-   ![ASG-setup2](../Images/VPC-project2.png)  
+   ![ASG-setup2](../Images/Part1/VPC-project2.png)  
 
    After creatation of ASG, you should see the two available EC2 instances now.
 
@@ -29,17 +29,17 @@ AZ: 同一个region内一般有多个AZ，如ap-northeast-1a, ap-northeast-1b.
    Now your servers are ready, you need to put your applications on them. But you can't access them directly, because they are in private subnets.  
    Therefore you need to create a bastion host.  
    Create an EC2 (your bastion host) in public subnet. Then ssh to this bastion EC2, and ssh to the private EC2 on your bastion EC2.  
-   ![Bastion-Host](../Images/VPC-project3.png)
+   ![Bastion-Host](../Images/Part1/VPC-project3.png)
 
 4. **Login EC2 by Bastion Host**:  
 
-   ![Bastion-Moba](../Images/VPC-Moba.png)  
+   ![Bastion-Moba](../Images/Part1/VPC-Moba.png)  
 
    After login private EC2 server, add python application on this EC2 server:  
    vim index.html  
    Press 'i': insert mode  
    Use example html codes: https://www.w3schools.com/html/html_basic.asp:  
-   ![VPC-html](../Images/VPC-HTML.png)  
+   ![VPC-html](../Images/Part1/VPC-HTML.png)  
    After insertion, do 'Esc'  
    Enter ':wq' to save and quit    
    Then do: python3 -m http.server 8000  
@@ -49,19 +49,19 @@ AZ: 同一个region内一般有多个AZ，如ap-northeast-1a, ap-northeast-1b.
    
    In EC2, choose load balancer  
 
-   ![VPC-LB1](../Images/VPC-LB.png)  
+   ![VPC-LB1](../Images/Part1/VPC-LB.png)  
 
    LB basic configs:  
 
-   ![VPC-LB2](../Images/VPC-LB2.png)  
+   ![VPC-LB2](../Images/Part1/VPC-LB2.png)  
 
    Set up which VPC to use and which public subnet to use:  
 
-   ![VPC-LB3](../Images/VPC-LB3.png)  
+   ![VPC-LB3](../Images/Part1/VPC-LB3.png)  
 
    Set up this ALB's SG:  
 
-   ![VPC-LB4](../Images/VPC-LB4.png)
+   ![VPC-LB4](../Images/Part1/VPC-LB4.png)
 
 6. **Create Target Group.**  
    
@@ -71,21 +71,21 @@ AZ: 同一个region内一般有多个AZ，如ap-northeast-1a, ap-northeast-1b.
     Go to Security on the right, add new inbound rule: HTTP 80 All ipv4
     Reason: 使用ALB-DNS name访问时，如果不带后缀，浏览器默认的访问端口为80，此时ALB使用的SG只包含了ssh port22 + TCP port8000，所以会unreachable；如果使用了ALB-DNS:8000，理论是可以直接访问的  
     
-    ![VPC-listener](../Images/VPC-Listener.png)
+    ![VPC-listener](../Images/Part1/VPC-Listener.png)
 
 7. **Final Test.**  
    
    Enter this DNS name into your browser:  
 
-   ![VPC-Final-Test](../Images/VPC-DNS.png)  
+   ![VPC-Final-Test](../Images/Part1/VPC-DNS.png)  
 
    You should see the following:  
 
-   ![VPC-Webpage](../Images/VPC-Webpage.png)  
+   ![VPC-Webpage](../Images/Part1/VPC-Webpage.png)  
 
    And check Target group page, should be like this:  
 
-   ![VPC-health-check](../Images/VPC-health-check.png)  
+   ![VPC-health-check](../Images/Part1/VPC-health-check.png)  
 
    Because we only set up applications on 1 EC2 server, so another EC2 server will not be able to receive traffic. Then the health check will show 1 healthy and 1 unhealthy.  
 
