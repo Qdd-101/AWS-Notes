@@ -44,13 +44,47 @@ Include: CLI,
 
     <img src="../Images/Part2/CLI_S3_Upload.png" width="50%">  
 
-    Upload single file:  
-    aws s3 cp your-single-file s3://your-bucket-name/single-file-folder/
+     Upload single file:  
+     aws s3 cp your-single-file s3://your-bucket-name/single-file-folder/
 
     3. Sync command to upload files:  
     **aws s3 sync . s3://zyw-first-bucket/youtube_project/raw_data/ --exclude "\*" --include "\*.json"**  
 
     sync: automatically check differences between your local folder and your S3 bucket, and only upload/delete/modify changes.  
     
-    Attention: if you delete some local files, files in S3 bucket will also be deleted when using sync.
+    Attention: if you delete some local files, files in S3 bucket will also be deleted when using sync.  
+
+- **GLUE**  
+  Definition: Fully managed ETL (Extraction, Transformation, Load) services by AWS.  
+
+  2 main features: 
+  Data catalog + Spark ETL engine
+    
+  Data catalog: stores metadata of your data. It means a centralized data catalog of your stored data, such as where your data is stored? which columns does it have? how does its schema look like?
+    
+  ETL engine: you can visually create, run and monitor ETL pipelines by GLUE.  
+
+  <img src = "../Images/Part2/GLUE.png" width="70%">  
+
+    Hands-on:
+    After uploading data to S3, go to Glue:
+    1. Create crawler and choose your S3 as its data store.
+    2. Add IAM role for this crawler service, because as a service, GLUE itself does not have access to the S3 service.  
+    <img src = "../Images/part2/GLUE-IAM-Role.png" width="70%">  
+
+    3. Add S3 full access permission to this role.  
+    <img src = "../Images/Part2/GLUE--IAM-Policy.png" width="70%">  
+
+    4. Add database and run crawler.  
+    <img src = "../Images/Part2/GLUE-Run-Crawler.png" width="70%">  
+
+    5. After crawling finished, a data catalog table will be created, check Data Catalog -> Databases -> Tables.  
+    <img src = "../Images/Part2/GLUE-Data-Catalog.png" width="70%">  
+
+    Use AWS Athena to query data:  
+    Click "View data", and go to Athena.  
+    Before querying data, create a bucket to store query results first.
+
+    <img src = "../Images/Part2/Athena-Query.png" width="70%">
+  
   
