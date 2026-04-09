@@ -33,21 +33,24 @@ Include: CLI,
 
     Upload data to S3 by AWS CLI:  
     1. cd your-data-folder  
-    2. **aws s3 cp . s3://your-bucket-name/folder1/sub-folder --recursive --exclude "\*" --include "\*.json"**  
+    2. **aws s3 cp . s3://your-bucket-name/folder1/sub-folder/ --recursive --exclude "\*" --include "\*.json"**  
    
     > Explanation:  
       cp . : copy files in the current folder to the target bucket  
-      your-bucket-name/folder1/subfolder: target bucket, automatically create folders if they don't exist  
+      your-bucket-name/folder1/subfolder/: target bucket, automatically create folders if they don't exist  
       --recursive: copy all files (MUST when multiple files are in the current folder)  
       --exclude: upload nothing (usually works together with include)  
       --include: only upload specified files  
 
-    <img src="../Images/Part2/CLI_S3_Upload.png" width="50%">
+    <img src="../Images/Part2/CLI_S3_Upload.png" width="50%">  
 
-    3. Another command to upload files:  
+    Upload single file:  
+    aws s3 cp your-single-file s3://your-bucket-name/single-file-folder/
+
+    3. Sync command to upload files:  
     **aws s3 sync . s3://zyw-first-bucket/youtube_project/raw_data/ --exclude "\*" --include "\*.json"**  
 
     sync: automatically check differences between your local folder and your S3 bucket, and only upload/delete/modify changes.  
     
-    Attention: if you delete some files, files in S3 bucket will also be deleted when using sync.
+    Attention: if you delete some local files, files in S3 bucket will also be deleted when using sync.
   
