@@ -70,7 +70,7 @@ Include: CLI,
     After uploading data to S3, go to Glue:
     1. Create crawler and choose your S3 as its data store.
     2. Add IAM role for this crawler service, because as a service, GLUE itself does not have access to the S3 service.  
-    <img src = "../Images/part2/GLUE-IAM-Role.png" width="70%">  
+    <img src = "../Images/Part2/GLUE-IAM-Role.png" width="70%">  
 
     3. Add S3 full access permission to this role.  
     <img src = "../Images/Part2/GLUE--IAM-Policy.png" width="70%">  
