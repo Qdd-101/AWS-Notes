@@ -15,12 +15,12 @@ AZ: 同一个region内一般有多个AZ，如ap-northeast-1a, ap-northeast-1b.
    
    Need to create a template first if no template created before，make its desired NumberOfEc2 = 2.  
    Need to create SG for this template.  
-   ![ASG-setup1](../Images/Part1/VPC-project1.png)
+   <img src = "../Images/Part1/VPC-project1.png" width="70%">
 
    Make sure the following ports are allowed in SG inbound rules:  
    (1). SSH port 22  
-   (2). TCP port 8000
-   ![ASG-setup2](../Images/Part1/VPC-project2.png)  
+   (2). TCP port 8000  
+   <img src = "../Images/Part1/VPC-project2.png" width="70%">
 
    After creatation of ASG, you should see the two available EC2 instances now.
 
@@ -29,7 +29,8 @@ AZ: 同一个region内一般有多个AZ，如ap-northeast-1a, ap-northeast-1b.
    Now your servers are ready, you need to put your applications on them. But you can't access them directly, because they are in private subnets.  
    Therefore you need to create a bastion host.  
    Create an EC2 (your bastion host) in public subnet. Then ssh to this bastion EC2, and ssh to the private EC2 on your bastion EC2.  
-   ![Bastion-Host](../Images/Part1/VPC-project3.png)
+   <img src = "../Images/Part1/VPC-project3.png" width="70%">
+   
 
 4. **Login EC2 by Bastion Host**:  
 
@@ -39,7 +40,9 @@ AZ: 同一个region内一般有多个AZ，如ap-northeast-1a, ap-northeast-1b.
    vim index.html  
    Press 'i': insert mode  
    Use example html codes: https://www.w3schools.com/html/html_basic.asp:  
-   ![VPC-html](../Images/Part1/VPC-HTML.png)  
+
+   <img src = "../Images/Part1/VPC-HTML.png" width="30%">  
+
    After insertion, do 'Esc'  
    Enter ':wq' to save and quit    
    Then do: python3 -m http.server 8000  
@@ -49,19 +52,17 @@ AZ: 同一个region内一般有多个AZ，如ap-northeast-1a, ap-northeast-1b.
    
    In EC2, choose load balancer  
 
-   ![VPC-LB1](../Images/Part1/VPC-LB.png)  
+   <img src = "../Images/Part1/VPC-LB.png" width="70%">
 
    LB basic configs:  
 
-   ![VPC-LB2](../Images/Part1/VPC-LB2.png)  
+   <img src = "../Images/Part1/VPC-LB2.png" width="40%">
 
    Set up which VPC to use and which public subnet to use:  
-
-   ![VPC-LB3](../Images/Part1/VPC-LB3.png)  
+   <img src = "../Images/Part1/VPC-LB3.png" width="70%">
 
    Set up this ALB's SG:  
-
-   ![VPC-LB4](../Images/Part1/VPC-LB4.png)
+   <img src = "../Images/Part1/VPC-LB4.png" width="40%">
 
 6. **Create Target Group.**  
    
@@ -71,21 +72,21 @@ AZ: 同一个region内一般有多个AZ，如ap-northeast-1a, ap-northeast-1b.
     Go to Security on the right, add new inbound rule: HTTP 80 All ipv4
     Reason: 使用ALB-DNS name访问时，如果不带后缀，浏览器默认的访问端口为80，此时ALB使用的SG只包含了ssh port22 + TCP port8000，所以会unreachable；如果使用了ALB-DNS:8000，理论是可以直接访问的  
     
-    ![VPC-listener](../Images/Part1/VPC-Listener.png)
+    <img src = "../Images/Part1/VPC-Listener.png" width="40%">
 
 7. **Final Test.**  
    
    Enter this DNS name into your browser:  
 
-   ![VPC-Final-Test](../Images/Part1/VPC-DNS.png)  
+   <img src = "../Images/Part1/VPC-DNS.png" width="70%">  
 
    You should see the following:  
 
-   ![VPC-Webpage](../Images/Part1/VPC-Webpage.png)  
+   <img src = "../Images/Part1/VPC-Webpage.png" width="70%">  
 
    And check Target group page, should be like this:  
 
-   ![VPC-health-check](../Images/Part1/VPC-health-check.png)  
+   <img src = "../Images/Part1/VPC-health-check.png" width="70%">  
 
    Because we only set up applications on 1 EC2 server, so another EC2 server will not be able to receive traffic. Then the health check will show 1 healthy and 1 unhealthy.  
 

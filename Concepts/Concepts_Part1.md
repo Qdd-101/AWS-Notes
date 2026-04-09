@@ -83,7 +83,8 @@ Include: IAM, EC2, S3, VPC, Route 53
    **python3 -m http.server**, (port 8000 will be opened and wait for any potential traffic coming in).  
    Then add inbound rules in SG: allow traffic using port 8000 to pass through.  
    Open in your browser: http://public-address:8000. You can your ubuntu machine's folder structure.
-   ![python-server](../Images/Part1/python-8000.png)
+   <img src="../Images/Part1/python-8000.png" width="50%">
+
    
 - **S3**  
   
